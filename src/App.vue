@@ -9,7 +9,23 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { watchEffect } from 'vue';
+
+watchEffect(async () => {
+  await fetch(`https://restapi.fr/generator`, {
+    method: 'POST',
+    body: {
+      times: 2,
+      resourceName: 'usertest',
+      name: 'firstName',
+    },
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+});
+</script>
 
 <style lang="scss">
 @import './assets/scss/base.scss';
