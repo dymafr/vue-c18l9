@@ -1,29 +1,23 @@
 <template>
   <div class="card p-20 d-flex justify-content-center align-items-center">
     <h1>La page B</h1>
+    <div></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onBeforeRouteUpdate, onBeforeRouteLeave } from 'vue-router';
+import { reactive, watchEffect } from 'vue';
+import { useRoute, onBeforeRouteUpdate } from 'vue-router';
 
-onBeforeRouteUpdate((to, from) => {
-  console.log({
-    hook: 'Before Update',
-    to: to.path,
-    from: from.path,
-  });
-});
+const state = reactive<{ user: any }>({ user: null });
 
-onBeforeRouteLeave((to, from) => {
-  console.log({
-    hook: 'Before Leave',
-    to: to.path,
-    from: from.path,
-  });
-  const response = confirm('Êtes-vous sûr de quitter la page ?');
-  if (!response) {
-    return false;
+const route = useRoute();
+
+watchEffect(async () => {
+  if (route.params.userId) {
+    state.user = await fetch(
+      `https://restapi.fr/api/usertest/${route.params.userId}`
+    ).json();
   }
 });
 </script>
