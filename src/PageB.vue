@@ -11,20 +11,18 @@
 import { reactive, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 
-const state = reactive<{ user: any; users: any[] }>({
+const state = reactive<{ user: any }>({
   user: null,
-  users: null,
 });
 
 const route = useRoute();
 
 watchEffect(async () => {
-  state.users = await fetch('https://restapi.fr/api/usertest/').json();
-  console.log(state.users);
   if (route.params.userId) {
-    state.user = await fetch(
+    const response = await fetch(
       `https://restapi.fr/api/usertest/${route.params.userId}`
-    ).json();
+    );
+    state.user = await response.json();
   } else {
     state.user = null;
   }
