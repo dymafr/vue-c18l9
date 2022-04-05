@@ -12,7 +12,7 @@ export const routes: RouteRecordRaw[] = [
     component: PageA,
   },
   {
-    path: '/b/:id?',
+    path: '/b/:userId?',
     component: PageB,
   },
 ];
