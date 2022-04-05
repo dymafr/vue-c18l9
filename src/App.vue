@@ -15,11 +15,11 @@ import { watchEffect } from 'vue';
 watchEffect(async () => {
   await fetch(`https://restapi.fr/generator`, {
     method: 'POST',
-    body: {
+    body: JSON.stringify({
       times: 2,
       resourceName: 'usertest',
       name: 'firstName',
-    },
+    }),
     headers: {
       'Content-Type': 'application/json',
     },
