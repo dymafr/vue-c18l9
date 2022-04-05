@@ -1,8 +1,17 @@
 <template>
-  <div class="card p-20 d-flex justify-content-center align-items-center">
+  <div
+    class="
+      card
+      p-20
+      d-flex
+      flex-column
+      justify-content-center
+      align-items-center
+    "
+  >
     <h1>La page B</h1>
     <div v-if="state.user">
-      <h2>{{ user.name }}</h2>
+      <h2>{{ state.user.name }}</h2>
     </div>
   </div>
 </template>
